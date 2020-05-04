@@ -1,0 +1,28 @@
+name: shadowfax
+type: websocket
+host: 127.0.0.1
+port: 1215
+mode: process
+access_log: true
+app_pool_capacity: 10
+
+server:
+  worker_num: 1
+  task_worker_num: 0
+  enable_coroutine: false
+  task_enable_coroutine: false
+  enable_static_handler: true
+  document_root: public
+
+abstracts:
+  - cookie
+  - session
+  - session.store
+  - redirect
+  - auth
+  - auth.driver
+  - \Illuminate\Session\Middleware\StartSession
+
+controller:
+  host: 127.0.0.1
+  port: 1216
