@@ -35,7 +35,7 @@ new Vue({
                 return '('+this.users_count+' participants)';
             }
 
-            return '(no participant)';
+            return '(no participants)';
         },
     },
 
