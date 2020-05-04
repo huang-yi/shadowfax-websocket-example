@@ -10,7 +10,9 @@
 </head>
 <body class="w-full h-full bg-gray-800">
 <div id="app" class="h-full p-5 text-white" v-cloak>
-    <div v-for="input in inputs" class="text-white font-bold">@{{ input }}</div>
+    <div id="box">
+        <div v-for="input in inputs" class="text-white font-bold">@{{ input }}</div>
+    </div>
 
     <div class="flex text-green-400 font-bold">
         <span>&gt;</span>

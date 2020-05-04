@@ -9,9 +9,12 @@ new Vue({
         input: null,
 
         inputs: [],
+
+        box: null,
     },
 
     mounted() {
+        this.box = this.$el.querySelector('#box');
         this.connect();
     },
 
@@ -24,11 +27,11 @@ new Vue({
             });
 
             this.socket.addEventListener('message', event => {
-                this.inputs.push(event.data);
+                this.push(event.data);
             });
 
             this.socket.addEventListener('close', event => {
-                this.inputs.push('Connection lost!');
+                this.push('Connection lost!');
             });
         },
 
@@ -62,6 +65,22 @@ new Vue({
             this.socket.send(message);
 
             this.input.value = '';
+        },
+
+        push(content) {
+            if (this.inputs.length === 100) {
+                this.inputs.splice(0, 1);
+            }
+
+            this.inputs.push(content);
+
+            setTimeout(() => {
+                this.box.scroll({
+                    top: this.box.scrollHeight,
+                    left: 0,
+                    behavior: 'smooth',
+                })
+            }, 100);
         },
     },
 });

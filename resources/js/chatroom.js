@@ -17,6 +17,12 @@ new Vue({
         message: '',
 
         messages: [],
+
+        box: null,
+    },
+
+    mounted() {
+        this.box = this.$el.querySelector('#box');
     },
 
     computed: {
@@ -102,7 +108,7 @@ new Vue({
         },
 
         pushMessage(user, content) {
-            this.messages.push({
+            this.push({
                 type: 'message',
                 user: user,
                 content: content,
@@ -110,10 +116,26 @@ new Vue({
         },
 
         pushNotification(content) {
-            this.messages.push({
+            this.push({
                 type: 'notification',
                 content: content,
             });
+        },
+
+        push(message) {
+            if (this.messages.length === 100) {
+                this.messages.splice(0, 1);
+            }
+
+            this.messages.push(message);
+
+            setTimeout(() => {
+                this.box.scroll({
+                    top: this.box.scrollHeight,
+                    left: 0,
+                    behavior: 'smooth',
+                })
+            }, 100);
         },
     },
 });

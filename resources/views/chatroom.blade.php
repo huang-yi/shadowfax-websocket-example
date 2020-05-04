@@ -10,13 +10,13 @@
 </head>
 <body class="bg-gray-200">
 <div id="app" class="text-gray-900 relative" v-cloak>
-    <div class="container mx-auto h-screen flex flex-col">
+    <div class="container mx-auto h-screen flex flex-col flex-no-wrap">
         <div class="text-center p-1 border-b border-gray-400 shadow-sm">
             <h1 class="font-bold text-2xl visible">CHATROOM</h1>
             <small>@{{ participant }}</small>
         </div>
-        <div class="flex-auto">
-            <div class="w-full overflow-y-auto py-5 px-2">
+        <div id="box" class="flex-1 w-full h-full overflow-y-auto scrolling-touch">
+            <div class="py-3 px-2">
                 <div v-for="message in messages" class="mb-5">
                     <div v-if="message.type === 'notification'" class="text-center">
                         <span class="bg-gray-300 text-gray-600 text-sm rounded p-1 break-all">@{{ message.content }}</span>
