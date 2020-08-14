@@ -55,7 +55,9 @@ new Vue({
                 return alert('The name may not be greater than 12 characters.');
             }
 
-            this.socket = new WebSocket('ws://'+location.host+'/chatroom?name='+name);
+            let protocol = location.protocol === 'https:' ? 'wss': 'ws';
+
+            this.socket = new WebSocket(protocol+'://'+location.host+'/chatroom?name='+name);
 
             this.socket.addEventListener('message', event => {
                 const message = JSON.parse(event.data);

@@ -20,7 +20,9 @@ new Vue({
 
     methods: {
         connect() {
-            this.socket = new WebSocket('ws://'+location.host+'/echo');
+            let protocol = location.protocol === 'https:' ? 'wss': 'ws';
+
+            this.socket = new WebSocket(protocol+'://'+location.host+'/echo');
 
             this.socket.addEventListener('open', () => {
                 this.initInput();
