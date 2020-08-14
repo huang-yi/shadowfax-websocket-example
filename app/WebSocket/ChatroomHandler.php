@@ -71,10 +71,12 @@ class ChatroomHandler implements Handler
      */
     public function onMessage(Connection $connection, Message $message)
     {
-        $this->broadcast(['message', [
-            'user' => $this->users[$connection],
-            'content' => $message->getData(),
-        ]]);
+        if ($message->getData() !== 'ping') {
+            $this->broadcast(['message', [
+                'user' => $this->users[$connection],
+                'content' => $message->getData(),
+            ]]);
+        }
     }
 
     /**

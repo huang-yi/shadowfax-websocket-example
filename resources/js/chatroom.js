@@ -59,6 +59,14 @@ new Vue({
 
             this.socket = new WebSocket(protocol+'://'+location.host+'/chatroom?name='+name);
 
+            let heartbeat = null;
+
+            this.socket.addEventListener('open', event => {
+                heartbeat = setInterval(() => {
+                    this.socket.send('ping');
+                }, 10);
+            });
+
             this.socket.addEventListener('message', event => {
                 const message = JSON.parse(event.data);
 
@@ -81,6 +89,8 @@ new Vue({
             });
 
             this.socket.addEventListener('close', event => {
+                clearInterval(heartbeat);
+
                 alert('Connection lost!');
             });
         },
