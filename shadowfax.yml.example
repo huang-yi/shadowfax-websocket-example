@@ -8,9 +8,7 @@ app_pool_capacity: 10
 
 server:
   worker_num: 1
-  task_worker_num: 0
   enable_coroutine: false
-  task_enable_coroutine: false
 
 abstracts:
   - cookie
@@ -19,8 +17,20 @@ abstracts:
   - redirect
   - auth
   - auth.driver
-  - \Illuminate\Session\Middleware\StartSession
+  - Illuminate\Session\Middleware\StartSession
 
-controller:
+controllers:
+  - "*"
+
+cleaners:
+  - app/Cleaners/
+
+db_pools:
+  mysql: 3
+
+redis_pools:
+  default: 3
+
+controller_server:
   host: 127.0.0.1
   port: 1216
