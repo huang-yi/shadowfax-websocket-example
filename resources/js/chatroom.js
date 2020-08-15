@@ -64,7 +64,7 @@ new Vue({
             this.socket.addEventListener('open', event => {
                 heartbeat = setInterval(() => {
                     this.socket.send('ping');
-                }, 10);
+                }, 10000);
             });
 
             this.socket.addEventListener('message', event => {
